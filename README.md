@@ -18,14 +18,6 @@ A **full-stack Resume Management System** built with **MERN Stack** to create, m
 - ✅ Fully responsive UI with React & MUI
 - ✅ Secure password handling and protected routes
 
----
-
-## 🎬 Demo
-
-![Demo GIF](https://media.giphy.com/media/3o7TKF1yU5L2CrO4y0/giphy.gif)  
-> Experience the magic of managing resumes effortlessly! ✨
-
----
 
 ## ⚡ Installation & Setup
 
