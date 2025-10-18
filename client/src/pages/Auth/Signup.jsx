@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SignIn from "./SignInWithGoogle";
 import { handleError, handleSuccess } from "../../utils";
 import "../../styles/Signup.css";
-import api from "../../api"; // ✅ use centralized API
+import api from "../../api"; // centralized API with baseURL
 
 function Signup() {
   const [signupInfo, setSignupInfo] = useState({
@@ -26,14 +26,13 @@ function Signup() {
     const { name, email, password } = signupInfo;
 
     if (!name || !email || !password) {
-      return handleError("Name, email and password are required");
+      return handleError("Name, email, and password are required");
     }
 
     try {
       // ✅ Correct backend route
       const response = await api.post("/auth/signup", signupInfo);
       const result = response.data;
-
       const { success, message, error } = result;
 
       if (success) {
@@ -44,9 +43,11 @@ function Signup() {
       } else {
         handleError(message || "Signup failed");
       }
+
       console.log(result);
     } catch (err) {
-      handleError(err.response?.data?.message || err.message);
+      console.error(err);
+      handleError(err.response?.data?.message || err.message || "Server error");
     }
   };
 
@@ -58,33 +59,33 @@ function Signup() {
           <div>
             <label htmlFor="name">Name</label>
             <input
-              onChange={handleChange}
               type="text"
               name="name"
               placeholder="Enter your name"
               value={signupInfo.name}
+              onChange={handleChange}
             />
           </div>
 
           <div>
             <label htmlFor="email">Email</label>
             <input
-              onChange={handleChange}
               type="email"
               name="email"
               placeholder="Enter your email"
               value={signupInfo.email}
+              onChange={handleChange}
             />
           </div>
 
           <div>
             <label htmlFor="password">Password</label>
             <input
-              onChange={handleChange}
               type="password"
               name="password"
               placeholder="Enter your password"
               value={signupInfo.password}
+              onChange={handleChange}
             />
           </div>
 
