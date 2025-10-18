@@ -26,7 +26,7 @@ Follow these steps to get the **Resume System** up and running locally 🚀
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/ResumeSystem.git
+git clone https://github.com/PATELKRISH9/ResumeSystem.git
 cd ResumeSystem
 ```
 ### 2️⃣ Install Dependencies & Setup Environment
