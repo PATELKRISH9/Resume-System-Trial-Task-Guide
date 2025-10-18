@@ -28,6 +28,35 @@ Follow these steps to get the **Resume System** up and running locally 🚀
 ```bash
 git clone https://github.com/<your-username>/ResumeSystem.git
 cd ResumeSystem
+```
+### 2️⃣ Install Dependencies & Setup Environment
+```bash
+cd server
+npm install
+
+# Create a .env file inside server folder
+echo "MONGO_URI=your_mongo_connection_string" >> .env
+echo "JWT_SECRET=your_secret_key" >> .env
+echo "PORT=8080" >> .env
+```
+### Frontend:
+```bash
+cd ../client
+npm install
+```
+### 3️⃣ Run the Application:
+ Start Backend Server:
+```bash
+cd ../server
+npm start
+```
+ Start Frontend Client:
+ ```bash
+cd ../client
+npm start
+```
+
+
 
 
 
