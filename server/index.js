@@ -1,47 +1,52 @@
+// Load environment variables first
+require('dotenv').config();
+
 const express = require('express');
-const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mongoDB = require('./config/db');
+const connectDB = require('./config/db');
+
+// Routes
 const authRoutes = require('./routes/auth.route');
 const userRoutes = require('./routes/user.route');
 const resumeRoutes = require('./routes/resume.route');
-const adminRoutes = require('./routes/admin.route'); // Import admin routes
+const adminRoutes = require('./routes/admin.route');
 
 const app = express();
 
-//dotenv config
-dotenv.config();
+// Connect to MongoDB
+connectDB();
 
-//database config   
-mongoDB();
-
-
+// Middleware
+app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000' }));
 app.use(express.json());
-//middlewares
-app.use(cors());
-
-//routes
 app.use(bodyParser.json());
+
+// Debug logging for incoming requests
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
+});
+
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/data', resumeRoutes);
-app.use('/api/admin', adminRoutes); // Use admin routes
+app.use('/api/admin', adminRoutes);
 
-//middleware for logging
-app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
-    next();
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: 'Route not found' });
 });
 
-//error handling middleware
+// Global error handler
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+  console.error('❌ Error:', err.stack || err);
+  res.status(500).json({ success: false, message: 'Internal Server Error' });
 });
 
-
-app.listen(process.env.PORT, () => {
-    //  console.log(`Server is working on https://resume-builder-mern-eight.vercel.app:${process.env.PORT}`);
-    console.log(`Server is working on http://localhost:${process.env.PORT}`);
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`✅ Server running on http://localhost:${PORT}`);
 });
