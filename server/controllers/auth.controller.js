@@ -49,6 +49,7 @@ const googleSignIn = async (req, res) => {
 };
 
 // Traditional Signup
+// Traditional Signup
 const signup = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -64,8 +65,19 @@ const signup = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        // Generate a unique username
+        let usernameBase = name.split(" ").join("").toLowerCase();
+        let username = usernameBase;
+        let count = 1;
+
+        while (await User.findOne({ username })) {
+            username = usernameBase + count;
+            count++;
+        }
+
         const newUser = new User({
             name,
+            username,       // ✅ Add username here
             email,
             password: hashedPassword,
             isAdmin: false
