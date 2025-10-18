@@ -12,7 +12,14 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000' }));
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://resume-system-trial-task-guide.onrender.com'
+  ],
+  credentials: true
+}));
 
 // Debug logs to confirm env variables are loaded
 console.log('Server starting...');
