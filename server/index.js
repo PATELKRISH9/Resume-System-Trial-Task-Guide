@@ -23,10 +23,10 @@ app.use(cors());
 
 //routes
 app.use(bodyParser.json());
-app.use('/api/auth', authRoutes);
-app.use('/api/user', userRoutes);
-app.use('/api/data', resumeRoutes);
-app.use('/api/admin', adminRoutes); // Use admin routes
+app.use('https://backend-1-22do.onrender.com/api/api/auth', authRoutes);
+app.use('https://backend-1-22do.onrender.com/api/api/user', userRoutes);
+app.use('https://backend-1-22do.onrender.com/api/api/data', resumeRoutes);
+app.use('https://backend-1-22do.onrender.com/api/api/admin', adminRoutes); // Use admin routes
 
 //middleware for logging
 app.use((req, res, next) => {
