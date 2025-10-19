@@ -55,7 +55,7 @@ npm start
 cd ../client
 npm start
 ```
-🔐 Admin Login Credentials
+### 🔐 Admin Login Credentials
 
 To access the Admin Panel, use the following credentials:
 
